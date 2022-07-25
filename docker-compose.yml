@@ -8,6 +8,7 @@ services:
     environment:
       - SPRING_MAIL_HOST=smtp.mailtrap.io
       - SPRING_MAIL_PORT=2525
+      - SENDER_EMAIL=to@example.com
       - RECIPIENT_EMAIL=to@example.com
       - SPRING_MAIL_SENDER_USERNAME=7e0bbe9690609f
       - SPRING_MAIL_SENDER_PASSWORD=5648d96a6c7e37

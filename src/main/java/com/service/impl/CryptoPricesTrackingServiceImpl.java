@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.client.CoinGeckoRestApi;
 import com.configuration.AlertConfig;
+import com.configuration.EmailConfig;
 import com.dto.CryptoPricesOutput;
 import com.dto.EmailDetails;
 import com.entity.BitcoinData;
@@ -11,7 +12,6 @@ import com.service.EmailService;
 import com.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,16 +24,15 @@ import java.util.List;
 public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingService {
     private final CoinGeckoRestApi coinGeckoRestApi;
     private final CryptoPricesRepository cryptoPricesRepository;
+    private final EmailConfig emailConfig;
     private final AlertConfig alertConfig;
     private final EmailService emailService;
 
-    @Value("${recipient.email}")
-    private String recipientEmail;
-
     @Autowired
-    public CryptoPricesTrackingServiceImpl(CoinGeckoRestApi coinGeckoRestApi, CryptoPricesRepository cryptoPricesRepository, AlertConfig alertConfig, EmailService emailService) {
+    public CryptoPricesTrackingServiceImpl(CoinGeckoRestApi coinGeckoRestApi, CryptoPricesRepository cryptoPricesRepository, EmailConfig emailConfig, AlertConfig alertConfig, EmailService emailService) {
         this.coinGeckoRestApi = coinGeckoRestApi;
         this.cryptoPricesRepository = cryptoPricesRepository;
+        this.emailConfig = emailConfig;
         this.alertConfig = alertConfig;
         this.emailService = emailService;
     }
@@ -69,7 +68,10 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
 
     private void alertUser(double alertPrice) {
         log.info("New price is {} at {} ", alertPrice, java.time.LocalTime.now());
-        EmailDetails emailDetails = EmailDetails.builder().recipient(recipientEmail)
+        EmailDetails emailDetails = EmailDetails.builder()
+                .senderName("John Smith")
+                .sender(emailConfig.senderEmail())
+                .recipient(emailConfig.recipientEmail())
                 .msgBody("New price is: " + alertPrice)
                 .subject("Price Change Alert")
                 .build();
