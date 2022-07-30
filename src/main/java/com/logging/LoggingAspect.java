@@ -21,17 +21,17 @@ public class LoggingAspect {
 
     @Pointcut("execution(* com.controller..*(..))")
     public void controllerPointCut() {
-        // Method is empty as this is just a Pointcut, the implementations are in the advices.
+        // Method is empty as this is just a Pointcut
     }
 
     @Pointcut("execution(* com.repository..*(..))")
     public void repositoryPointCut() {
-        // Method is empty as this is just a Pointcut, the implementations are in the advices.
+        // Method is empty as this is just a Pointcut
     }
 
     @Pointcut("execution(* com.service..*(..))")
     public void servicePointCut() {
-        // Method is empty as this is just a Pointcut, the implementations are in the advices.
+        // Method is empty as this is just a Pointcut
     }
 
     @Pointcut("execution(* com.scheduler..*(..))")
