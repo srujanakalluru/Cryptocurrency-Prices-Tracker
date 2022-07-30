@@ -6,9 +6,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 public class GlobalError {
     private String message;
     private String errorReason;

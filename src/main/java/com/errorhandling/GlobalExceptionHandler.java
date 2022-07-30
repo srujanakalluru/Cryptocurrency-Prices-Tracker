@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
     @ExceptionHandler(CryptoPricesTrackingException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<GlobalError> handleCryptoPricesTrackingException(CryptoPricesTrackingException e){
+    public ResponseEntity<GlobalError> handleCryptoPricesTrackingException(CryptoPricesTrackingException e) {
         GlobalError error = new GlobalError(e.getMessage(), e.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }

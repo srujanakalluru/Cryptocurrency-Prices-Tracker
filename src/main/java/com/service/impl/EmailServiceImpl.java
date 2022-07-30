@@ -29,7 +29,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper mimeMessageHelper;
         try {
             mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            mimeMessageHelper.setFrom(new InternetAddress(details.getSender(),details.getSenderName()));
+            mimeMessageHelper.setFrom(new InternetAddress(details.getSender(), details.getSenderName()));
             mimeMessageHelper.setTo(details.getRecipient());
             mimeMessageHelper.setText(details.getMsgBody());
             mimeMessageHelper.setSubject(details.getSubject());

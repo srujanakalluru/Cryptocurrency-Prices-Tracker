@@ -21,10 +21,8 @@ public class BitcoinData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     @Column
     LocalDateTime date;
-
     @Column
     double price;
 }
