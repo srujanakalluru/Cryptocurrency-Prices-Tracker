@@ -4,7 +4,6 @@ import com.client.CoinGeckoRestApi;
 import com.configuration.AlertConfig;
 import com.configuration.EmailConfig;
 import com.dto.CryptoPricesOutput;
-import com.dto.EmailDetails;
 import com.entity.BitcoinData;
 import com.repository.CryptoPricesRepository;
 import com.service.CryptoPricesTrackingService;
@@ -24,7 +23,6 @@ import java.util.List;
 public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingService {
     private final CoinGeckoRestApi coinGeckoRestApi;
     private final CryptoPricesRepository cryptoPricesRepository;
-    private final EmailConfig emailConfig;
     private final AlertConfig alertConfig;
     private final EmailService emailService;
 
@@ -32,7 +30,6 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
     public CryptoPricesTrackingServiceImpl(CoinGeckoRestApi coinGeckoRestApi, CryptoPricesRepository cryptoPricesRepository, EmailConfig emailConfig, AlertConfig alertConfig, EmailService emailService) {
         this.coinGeckoRestApi = coinGeckoRestApi;
         this.cryptoPricesRepository = cryptoPricesRepository;
-        this.emailConfig = emailConfig;
         this.alertConfig = alertConfig;
         this.emailService = emailService;
     }
@@ -48,7 +45,7 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
 
         cryptoPricesRepository.save(data);
         if ((currentValue > alertConfig.alertPriceMax() || currentValue < alertConfig.alertPriceMin()) && currentValue != -1) {
-            alertUser(currentValue);
+            emailService.sendEmailAlert(currentValue);
         }
 
     }
@@ -66,16 +63,6 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
         }
     }
 
-    private void alertUser(double alertPrice) {
-        EmailDetails emailDetails = EmailDetails.builder()
-                .senderName("John Smith")
-                .sender(emailConfig.senderEmail())
-                .recipient(emailConfig.recipientEmail())
-                .msgBody("New price is: " + alertPrice)
-                .subject("Price Change Alert")
-                .build();
-        emailService.sendEmail(emailDetails);
-    }
 
 
 }
