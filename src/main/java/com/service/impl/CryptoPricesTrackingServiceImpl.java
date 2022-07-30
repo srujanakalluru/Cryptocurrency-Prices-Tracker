@@ -69,8 +69,9 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
     private void alertUser(double alertPrice) {
         EmailDetails emailDetails = EmailDetails.builder()
                 .senderName("John Smith")
-                .sender(emailConfig.senderEmail())
-                .recipient(emailConfig.recipientEmail())
+                .senderEmail(emailConfig.senderEmail())
+                .recipientName(emailConfig.recipientName())
+                .recipientEmail(emailConfig.recipientEmail())
                 .msgBody("New price is: " + alertPrice)
                 .subject("Price Change Alert")
                 .build();

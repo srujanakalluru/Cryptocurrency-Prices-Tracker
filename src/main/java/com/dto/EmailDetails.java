@@ -12,8 +12,9 @@ import lombok.ToString;
 @Builder
 @ToString
 public class EmailDetails {
-    private String recipient;
-    private String sender;
+    private String recipientEmail;
+    private String recipientName;
+    private String senderEmail;
     private String senderName;
     private String msgBody;
     private String subject;

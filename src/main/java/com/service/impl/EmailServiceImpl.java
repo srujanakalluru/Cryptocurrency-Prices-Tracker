@@ -1,18 +1,15 @@
 package com.service.impl;
 
 import com.dto.EmailDetails;
-import com.errorhandling.CryptoPricesTrackingException;
 import com.service.EmailService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -24,21 +21,16 @@ public class EmailServiceImpl implements EmailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendEmail(EmailDetails details) throws RuntimeException {
+    @SneakyThrows
+    public void sendEmail(EmailDetails details) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper;
-        try {
-            mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            mimeMessageHelper.setFrom(new InternetAddress(details.getSender(),details.getSenderName()));
-            mimeMessageHelper.setTo(details.getRecipient());
-            mimeMessageHelper.setText(details.getMsgBody());
-            mimeMessageHelper.setSubject(details.getSubject());
-            mimeMessageHelper.setPriority(0);
-            javaMailSender.send(mimeMessage);
-
-        } catch (MessagingException | MailAuthenticationException | UnsupportedEncodingException e) {
-            throw new CryptoPricesTrackingException(e.getMessage());
-        }
-
+        mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        mimeMessageHelper.setFrom(new InternetAddress(details.getSenderEmail(), details.getSenderName()));
+        mimeMessageHelper.setTo(new InternetAddress(details.getRecipientEmail(), details.getRecipientName()));
+        mimeMessageHelper.setText(details.getMsgBody());
+        mimeMessageHelper.setSubject(details.getSubject());
+        mimeMessageHelper.setPriority(0);
+        javaMailSender.send(mimeMessage);
     }
 }
