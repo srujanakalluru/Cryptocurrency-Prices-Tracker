@@ -1,9 +1,6 @@
 package com.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
+@ToString
 public class BitcoinData {
 
     public BitcoinData() {

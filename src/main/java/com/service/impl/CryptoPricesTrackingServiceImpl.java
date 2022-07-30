@@ -67,7 +67,6 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
     }
 
     private void alertUser(double alertPrice) {
-        log.info("New price is {} at {} ", alertPrice, java.time.LocalTime.now());
         EmailDetails emailDetails = EmailDetails.builder()
                 .senderName("John Smith")
                 .sender(emailConfig.senderEmail())
