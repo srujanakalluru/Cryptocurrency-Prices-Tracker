@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "main","feature-**"]
   pull_request:
-    branches: ["main"]
+    branches: ["main","feature-**"]
   workflow_dispatch:
   
 permissions:
@@ -24,9 +24,9 @@ jobs:
       run: mvn -B package --file pom.xml
 	  
   analysis:
-    needs: build
     runs-on: ubuntu-latest
-    steps: 
+	needs: build
+    steps:
       - name: Analyze with SonarCloud         
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
         env:
@@ -47,4 +47,3 @@ jobs:
             #-Dsonar.tests= # optional. For more info about Code Coverage, please refer to https://docs.sonarcloud.io/enriching/test-coverage/overview/
             # Adds more detail to both client and server-side analysis logs, activating DEBUG mode for the scanner, and adding client-side environment variables and system properties to the server-side log of analysis report processing.
             #-Dsonar.verbose= # optional, default is false 
-
