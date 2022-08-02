@@ -59,4 +59,4 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        run: docker-compose "docker-compose.yml" up --build
+        run: docker-compose up --build
