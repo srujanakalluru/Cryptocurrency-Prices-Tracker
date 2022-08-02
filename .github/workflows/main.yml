@@ -55,3 +55,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -build -d
+  deploy:
+    name: deploy to google cloud
+    needs: docker-build
+    uses: google-github-actions/deploy-cloudrun@v0
+    with:
+      service: ${{ env.SERVICE }}
+      region: ${{ env.REGION }}
+
