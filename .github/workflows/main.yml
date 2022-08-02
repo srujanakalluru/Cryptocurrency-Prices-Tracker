@@ -58,7 +58,7 @@ jobs:
   docker-deploy:
     name: deploy to google cloud
     needs: docker-build
-    uses: google-github-actions/deploy-cloudrun@v0
+    uses: actions/deploy-cloudrun@v0
     with:
       service: ${{ env.SERVICE }}
       image: crypto-prices-tracker
