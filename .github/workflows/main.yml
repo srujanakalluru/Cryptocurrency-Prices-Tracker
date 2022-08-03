@@ -62,9 +62,7 @@ jobs:
       - name: push to dockerhub
         uses: docker/build-push-action@v1
         with:
-          image: ${{ secrets.DOCKER_HUB_USERNAME }}/crypto-prices-tracker
+          repository: creationk/crypto-tracking-docker
           push: true
-          context: .
-          file: ./Dockerfile
           tags: latest
 
