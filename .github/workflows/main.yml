@@ -62,7 +62,7 @@ jobs:
       - name: push to dockerhub
         uses: docker/build-push-action@v1
         with:
-          repository: creationk/crypto-tracking-docker
+          repository: ${{ secrets.DOCKER_REPOSITORY }}
           push: true
           tags: latest
 
