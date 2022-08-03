@@ -25,7 +25,7 @@ jobs:
         run: mvn -B package --file pom.xml
   # sonar analysis
   sonar-analysis:
-    needs: build
+    needs: maven-build
     runs-on: ubuntu-latest
     steps:
       - name: Analyze with SonarCloud         
