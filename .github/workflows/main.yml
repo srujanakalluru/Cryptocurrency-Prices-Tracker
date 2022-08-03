@@ -52,8 +52,12 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run: docker-compose up -build -d --tag crypto-prices-tracker:latest
-      - name: Docker Push
-        run: docker push crypto-prices-tracker:latest
+      - name: checkout the repo
+        uses: actions/checkout@v2
+      - name: push to dockerhub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          tags: latest
+
