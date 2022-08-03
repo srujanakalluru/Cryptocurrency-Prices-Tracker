@@ -55,12 +55,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -build -d
-  docker-deploy:
-    name: deploy to google cloud
-    needs: docker-build
-    uses: actions/deploy-cloudrun@v0
-    with:
-      service: ${{ env.SERVICE }}
-      image: crypto-prices-tracker
-      region: ${{ env.REGION }}
 
