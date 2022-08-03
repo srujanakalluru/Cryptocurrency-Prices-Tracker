@@ -1,7 +1,7 @@
 version: '3'
 services:
   crypto-prices-tracker:
-    image: crypto-prices-tracker:latest
+    image: crypto-prices-tracker
     ports:
       - "8080:8080"
     restart: always
