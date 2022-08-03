@@ -55,4 +55,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -build -d --tag crypto-prices-tracker:latest
-
+      - name: Docker Push
+        run: docker-push crypto-prices-tracker:latest
