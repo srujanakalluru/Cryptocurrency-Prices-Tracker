@@ -3,7 +3,9 @@ package com.logging;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -44,6 +46,11 @@ public class LoggingAspect {
         // Method is empty as this is just a Pointcut
     }
 
+    @Pointcut("execution(* com..*(..))")
+    private void allClassesPointCut() {
+        // Method is empty as this is just a Pointcut
+    }
+
     @Around("schedulerPointCut()")
     public Object logAroundScheduler(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         return logBean(proceedingJoinPoint, SCHEDULER);
@@ -69,6 +76,27 @@ public class LoggingAspect {
     public Object logAroundRepository(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         return logBean(proceedingJoinPoint, REPOSITORY);
     }
+
+
+    @AfterThrowing(value = "controllerPointCut()", throwing = "ex")
+    public void logAfterThrowingExceptionCall(JoinPoint joinPoint, Throwable ex) {
+        logErrorBean(joinPoint, ex);
+    }
+
+    private void logErrorBean(JoinPoint joinPoint, Throwable ex) {
+        CodeSignature signature = (CodeSignature) joinPoint.getSignature();
+
+        LoggingBean bean = LoggingBean.builder()
+                .className(joinPoint.getTarget().getClass().getSimpleName())
+                .method(signature.getName())
+                .parameters(signature.getParameterNames())
+                .arguments(joinPoint.getArgs())
+                .stackTrace(ex.getMessage() )
+                .build();
+        log.error(bean.toString());
+
+    }
+
 
     private Object logBean(ProceedingJoinPoint proceedingJoinPoint, LoggingBean.ApiType apiType) throws Throwable {
         long startTime = System.currentTimeMillis();
