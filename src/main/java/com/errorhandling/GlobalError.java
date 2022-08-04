@@ -3,6 +3,7 @@ package com.errorhandling;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 public class GlobalError {
-    private String message;
+    private int errorCode;
+    private HttpStatus status;
     private String errorReason;
     private LocalDateTime timeStamp;
 }
