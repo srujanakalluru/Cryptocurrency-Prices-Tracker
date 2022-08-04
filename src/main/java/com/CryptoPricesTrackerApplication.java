@@ -1,9 +1,7 @@
 package com;
 
-import com.errorhandling.GlobalExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
