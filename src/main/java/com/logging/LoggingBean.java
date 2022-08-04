@@ -24,7 +24,9 @@ public class LoggingBean {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(apiType).append("\t=\t");
+        if (null != apiType) {
+            sb.append(apiType).append("\t=\t");
+        }
         sb.append("{");
         sb.append("className =\"")
                 .append(className).append("\"")
