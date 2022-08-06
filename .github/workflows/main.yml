@@ -64,6 +64,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: creationk/crypto-prices-tracker:latest
+#          tags: creationk/crypto-prices-tracker:latest
       - name: Start containers
         run: docker-compose up -d
