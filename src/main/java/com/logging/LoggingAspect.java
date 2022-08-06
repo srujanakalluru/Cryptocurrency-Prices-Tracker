@@ -91,7 +91,7 @@ public class LoggingAspect {
                 .method(signature.getName())
                 .parameters(signature.getParameterNames())
                 .arguments(joinPoint.getArgs())
-                .stackTrace(ex.getMessage() )
+                .stackTrace(ex.getMessage())
                 .build();
         log.error(bean.toString());
 

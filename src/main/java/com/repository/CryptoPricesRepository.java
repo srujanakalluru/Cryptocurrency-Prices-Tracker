@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface CryptoPricesRepository extends PagingAndSortingRepository<BitcoinData, Long> {
     List<BitcoinData> findAllByDateBetween(LocalDateTime start, LocalDateTime end, Pageable paging);
+
     List<BitcoinData> findAllByDateBetween(LocalDateTime start, LocalDateTime end);
 
 }

@@ -1,6 +1,9 @@
 package com.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,15 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @ToString
 public class BitcoinData {
-
-    public BitcoinData() {
-        //Adding default constructor for hibernate instantiation
-    }
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
