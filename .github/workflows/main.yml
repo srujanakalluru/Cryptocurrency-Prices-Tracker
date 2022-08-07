@@ -46,6 +46,8 @@ jobs:
             # mandatory
             -Dsonar.projectKey=crypto-prices-tracker
             -Dsonar.organization=srujanakalluru
+            -Dsonar.language=java
+            -Dsonar.jacoco.reportPath=${buildDir}/target/jacoco.exec
             -Dsonar.coverage.jacoco.xmlReportPaths=${buildDir}/target/site/jacoco/jacoco.xml
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
   # docker compose up
