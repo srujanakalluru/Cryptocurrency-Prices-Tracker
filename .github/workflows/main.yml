@@ -74,5 +74,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-        run: ls
-        working-directory: /home/runner/work/Crypto-Prices-Tracker/Crypto-Prices-Tracker
+        run: ls -la
+        working-directory: ${{ github.workspace }}/runner/work/Crypto-Prices-Tracker/Crypto-Prices-Tracker
