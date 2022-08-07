@@ -48,7 +48,7 @@ jobs:
             -Dsonar.organization=srujanakalluru
             -Dsonar.language=java
             -Dsonar.projectBaseDir=.
-            -Dsonar.tests=${projectBaseDir}/src/test/java
+            #-Dsonar.tests=${projectBaseDir}/src/test/java
             -Dsonar.jacoco.reportPath=${projectBaseDir}/target/jacoco.exec
             -Dsonar.coverage.jacoco.xmlReportPaths=${buildDir}/target/site/jacoco/jacoco.xml
             -Dsonar.verbose=true
