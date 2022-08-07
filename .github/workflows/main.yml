@@ -74,5 +74,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-        run: ls -la
+        run: tree
         working-directory: .
