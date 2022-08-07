@@ -75,4 +75,4 @@ jobs:
     steps:
       - name: print env
         run: ls
-        working-directory: ./docker/
+        working-directory: /home/runner/work/Crypto-Prices-Tracker/Crypto-Prices-Tracker
