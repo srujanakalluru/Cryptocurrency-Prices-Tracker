@@ -75,4 +75,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-        run: echo ${{ buildDir }}
+        run: echo ${buildDir}
