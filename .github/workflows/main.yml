@@ -74,5 +74,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-        run: find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
-        working-directory: .
+        run: ls
+        working-directory: ./docker/
