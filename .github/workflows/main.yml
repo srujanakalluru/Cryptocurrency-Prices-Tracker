@@ -47,7 +47,7 @@ jobs:
             -Dsonar.projectKey=crypto-prices-tracker
             -Dsonar.organization=srujanakalluru
             -Dsonar.language=java
-            -Dsonar.projectBaseDir=.
+            -Dsonar.projectBaseDir=${{ github.workspace }}/runner/work/Crypto-Prices-Tracker/Crypto-Prices-Tracker/
             -Dsonar.coverage.jacoco.xmlReportPaths=${sonar.projectBaseDir}target/site/jacoco/jacoco.xml
             -Dsonar.verbose=true
         uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
@@ -75,4 +75,4 @@ jobs:
     steps:
       - name: print env
         run: ls -la
-        working-directory: ${{ github.workspace }}/runner
+        working-directory: ${{ github.workspace }}
