@@ -74,5 +74,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-        run: ls
-        working-directory: ${{ github.workspace }}
+        run: echo "github.workspace = ${{ github.workspace }}"
+
