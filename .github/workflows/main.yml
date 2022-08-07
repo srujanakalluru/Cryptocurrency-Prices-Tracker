@@ -74,4 +74,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-        run: echo ${buildDir}
+        run: ls -la
+        working-directory: ${{ github.workspace }}
