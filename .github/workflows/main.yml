@@ -75,4 +75,4 @@ jobs:
     steps:
       - name: print env
         run: ls -la
-        working-directory: ${{ github.workspace }}/runner/work/Crypto-Prices-Tracker/Crypto-Prices-Tracker
+        working-directory: ${{ github.workspace }}
