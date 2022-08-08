@@ -76,4 +76,4 @@ jobs:
     steps:
       - name: List files in the repository
         run: |
-          ls .
+          ls /github/workspace/
