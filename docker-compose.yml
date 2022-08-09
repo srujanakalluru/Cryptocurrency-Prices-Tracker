@@ -1,0 +1,19 @@
+version: '3'
+services:
+  crypto-prices-tracker:
+    image: creationk/crypto-prices-tracker
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      - SPRING_MAIL_HOST=smtp.mailtrap.io
+      - SPRING_MAIL_PORT=2525
+      - SENDER_NAME=John Smith
+      - SENDER_EMAIL=to@example.com
+      - RECIPIENT_NAME=Jack Sparrow
+      - RECIPIENT_EMAIL=to@example.com
+      - SPRING_MAIL_SENDER_USERNAME=7e0bbe9690609f
+      - SPRING_MAIL_SENDER_PASSWORD=5648d96a6c7e37
+      - ALERT_PRICE_MIN=29000
+      - ALERT_PRICE_MAX=30000
+      - ALERT_INTERVAL_SECONDS=3600
