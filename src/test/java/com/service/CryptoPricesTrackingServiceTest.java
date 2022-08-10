@@ -82,4 +82,37 @@ class CryptoPricesTrackingServiceTest {
         verify(emailService, times(1)).sendEmailAlert(anyDouble());
     }
 
+    @Test
+    void testCheckAndReportPrice_WithinRange() {
+        //given
+        CryptoPricesOutput body = new CryptoPricesOutput();
+        Bitcoin bitcoin = new Bitcoin();
+        bitcoin.setUsd(26000d);
+        body.setBitcoin(bitcoin);
+
+        //when
+        when(cryptoDetails.getBody()).thenReturn(body);
+        when(coinGeckoRestApi.getCryptoDetails()).thenReturn(cryptoDetails);
+        when(alertConfig.alertPriceMax()).thenReturn(28000d);
+        when(alertConfig.alertPriceMin()).thenReturn(25000d);
+
+        //then
+        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
+        verify(cryptoPricesRepository,times(1)).save(any(BitcoinData.class));
+    }
+
+    @Test
+    void testCheckAndReportPrice_nullResponseFromCoinGecko() {
+        //given
+        CryptoPricesOutput body = null;
+
+        //when
+        when(cryptoDetails.getBody()).thenReturn(body);
+        when(coinGeckoRestApi.getCryptoDetails()).thenReturn(cryptoDetails);
+
+        //then
+        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
+        verify(cryptoPricesRepository,times(0)).save(any(BitcoinData.class));
+    }
+
 }
