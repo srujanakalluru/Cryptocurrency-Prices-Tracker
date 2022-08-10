@@ -13,7 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
@@ -113,6 +116,59 @@ class CryptoPricesTrackingServiceTest {
         //then
         Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
         verify(cryptoPricesRepository,times(0)).save(any(BitcoinData.class));
+    }
+
+    @Test
+    void getPriceDetails_WithOnlyDate() {
+        //given
+        String date = "10-08-2022";
+        Integer limit = null;
+        Integer offset = null;
+
+        //when
+        when(cryptoPricesRepository
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(null);
+
+        //then
+        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository,times(1))
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
+
+    }
+
+    @Test
+    void getPriceDetails_WithDateLimitOffset() {
+        //given
+        String date = "10-08-2022";
+        Integer limit = 1;
+        Integer offset = 2;
+
+        //when
+        when(cryptoPricesRepository
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class), any(Pageable.class))).thenReturn(null);
+
+        //then
+        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository,times(1))
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class), any(Pageable.class));
+
+    }
+
+    @Test
+    void getPriceDetails_WithDateLimitAndNoOffset() {
+        //given
+        String date = "10-08-2022";
+        Integer limit = 1;
+        Integer offset = null;
+
+        //when
+        when(cryptoPricesRepository
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(null);
+
+        //then
+        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository,times(1))
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
     }
 
 }
