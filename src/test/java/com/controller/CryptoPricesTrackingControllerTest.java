@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.entity.BitcoinData;
+import com.errorhandling.CryptoPricesTrackingException;
 import com.service.CryptoPricesTrackingService;
 import com.utils.DateUtils;
 import org.junit.jupiter.api.Assertions;
@@ -27,12 +28,31 @@ class CryptoPricesTrackingControllerTest {
     @Mock
     CryptoPricesTrackingService cryptoPricesTrackingService;
 
+    @Mock
+    CryptoPricesTrackingException cryptoPricesTrackingException;
+
     @Test
     void testGetPriceDetails_success() {
-        BitcoinData data = BitcoinData.builder().id(2L).price(20000D).date(DateUtils.getDate("09-08-2022")).build();
-        when(cryptoPricesTrackingService.getPriceDetails(any(String.class),any(),any())).thenReturn(Collections.singletonList(data));
+        //given
+        List<BitcoinData> dataList = Collections.singletonList(BitcoinData.builder().id(2L).price(20000D).date(DateUtils.getDate("09-08-2022")).build());
+
+        //when
+        when(cryptoPricesTrackingService.getPriceDetails(any(String.class),any(),any())).thenReturn(dataList);
+
+        //then
         ResponseEntity<List<BitcoinData>> response = Assertions.assertDoesNotThrow(()->cryptoPricesTrackingController.getPriceDetails("09-08-2022",null,null));
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void testGetPriceDetails_failure() {
+        //given and when
+        when(cryptoPricesTrackingException.getMessage()).thenReturn("Custom cryptoPricesTrackingException");
+        when(cryptoPricesTrackingService.getPriceDetails(any(String.class),any(),any())).thenThrow(cryptoPricesTrackingException);
+
+        //then
+        CryptoPricesTrackingException e = Assertions.assertThrows(CryptoPricesTrackingException.class, ()->cryptoPricesTrackingController.getPriceDetails("09/08/2022",null,null));
+        Assertions.assertEquals("Custom cryptoPricesTrackingException",e.getMessage());
     }
 
 }
