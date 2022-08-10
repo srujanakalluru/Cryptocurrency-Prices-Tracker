@@ -1,13 +1,13 @@
 name: Pipeline
 on:
   push:
-    branches: [ "master","main" ]
+    branches: [ "master","main", "feature-**" ]
   pull_request:
     branches: [ "master","main" ]
     types: [ opened, synchronize, reopened ]
 jobs:
   build:
-    name: Build
+    name: Build and Sonar Scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
