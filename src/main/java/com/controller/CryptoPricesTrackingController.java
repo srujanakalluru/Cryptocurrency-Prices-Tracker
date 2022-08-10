@@ -25,7 +25,7 @@ public class CryptoPricesTrackingController {
     }
 
     @GetMapping(value = "/btc")
-    public ResponseEntity<List<BitcoinData>> getPriceDetails(@Pattern(regexp = "^([0-2][0-9]|(3)[0-1])(-)(((0)[0-9])|((1)[0-2]))(-)\\d{4}$") @RequestParam("date") String date, @RequestParam(required = false) Integer limit, @RequestParam(required = false) Integer offset) {
+    public ResponseEntity<List<BitcoinData>> getPriceDetails(@Pattern(regexp = "^([0-2]\\d|(3)[0-1])(-)(((0)\\d)|((1)[0-2]))(-)\\d{4}$") @RequestParam("date") String date, @RequestParam(required = false) Integer limit, @RequestParam(required = false) Integer offset) {
         return ResponseEntity.ok(service.getPriceDetails(date, limit, offset));
     }
 }

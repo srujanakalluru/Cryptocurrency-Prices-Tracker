@@ -14,7 +14,8 @@
     <artifactId>crypto-prices-tracker</artifactId>
     <version>latest</version>
     <name>crypto-prices-tracker</name>
-    <description>A REST API app that continuously monitors the price of Bitcoin using a third-party API and alerts a given email when the price either goes above or below given limits.
+    <description>A REST API app that continuously monitors the price of Bitcoin using a third-party API and alerts a
+        given email when the price either goes above or below given limits.
     </description>
 
     <properties>
@@ -72,6 +73,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
