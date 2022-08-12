@@ -171,4 +171,21 @@ class CryptoPricesTrackingServiceTest {
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
     }
 
+    @Test
+    void getPriceDetails_WithDateOffsetAndNoLimit() {
+        //given
+        String date = "10-08-2022";
+        Integer limit = null;
+        Integer offset = 1;
+
+        //when
+        when(cryptoPricesRepository
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(null);
+
+        //then
+        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository,times(1))
+                .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
+    }
+
 }

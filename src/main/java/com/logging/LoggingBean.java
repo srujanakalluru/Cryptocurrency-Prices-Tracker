@@ -65,7 +65,8 @@ public class LoggingBean {
         SERVICE("SERVICE"),
         REPOSITORY("REPOSITORY"),
         EXCEPTIONHANDLER("EXCEPTIONHANDLER"),
-        SCHEDULER("SCHEDULER");
+        SCHEDULER("SCHEDULER"),
+        ERROR("ERROR");
 
         private final String type;
 
