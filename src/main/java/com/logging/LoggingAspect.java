@@ -87,6 +87,7 @@ public class LoggingAspect {
         CodeSignature signature = (CodeSignature) joinPoint.getSignature();
 
         LoggingBean bean = LoggingBean.builder()
+                .apiType(ERROR)
                 .className(joinPoint.getTarget().getClass().getSimpleName())
                 .method(signature.getName())
                 .parameters(signature.getParameterNames())

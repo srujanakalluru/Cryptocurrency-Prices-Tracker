@@ -36,16 +36,16 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
 
     public void checkAndReportPrice() {
         CryptoPricesOutput body = coinGeckoRestApi.getCryptoDetails().getBody();
-        double currentValue = -1;
 
         if (null != body) {
-            currentValue = body.getBitcoin().getUsd();
-        }
-        BitcoinData data = BitcoinData.builder().price(currentValue).date(LocalDateTime.now()).build();
+            double currentValue = body.getBitcoin().getUsd();
+            BitcoinData data = BitcoinData.builder().price(currentValue).date(LocalDateTime.now()).build();
+            cryptoPricesRepository.save(data);
 
-        cryptoPricesRepository.save(data);
-        if ((currentValue > alertConfig.alertPriceMax() || currentValue < alertConfig.alertPriceMin()) && currentValue != -1) {
-            emailService.sendEmailAlert(currentValue);
+            if ((currentValue > alertConfig.alertPriceMax() || currentValue < alertConfig.alertPriceMin())) {
+                emailService.sendEmailAlert(currentValue);
+            }
+
         }
 
     }
