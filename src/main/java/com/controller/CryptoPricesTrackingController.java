@@ -32,9 +32,9 @@ public class CryptoPricesTrackingController {
 
     @ApiOperation("Retrieve current and historical bitcoin price information")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK Successfully fetched hospital data", response = List.class),
+            @ApiResponse(code = 200, message = "OK Successfully fetched the bitcoin data", response = List.class),
             @ApiResponse(code = 400, message = "Request is not well-formed, syntactically incorrect, or violates schema.", response = HttpClientErrorException.BadRequest.class),
-            @ApiResponse(code = 500, message = "An internal server error has occured", response = InternalError.class)
+            @ApiResponse(code = 500, message = "An internal server error has occurred", response = InternalError.class)
     })
     @GetMapping(value = "/btc", produces = {"application/json"})
     public ResponseEntity<List<BitcoinData>> getPriceDetails(@Pattern(regexp = "^([0-2]\\d|(3)[0-1])(-)(((0)\\d)|((1)[0-2]))(-)\\d{4}$", message = "must match the pattern: dd-MM-yyyy") @RequestParam("date") String date, @RequestParam(required = false) Integer limit, @RequestParam(required = false) Integer offset) {
