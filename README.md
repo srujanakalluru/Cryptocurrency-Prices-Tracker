@@ -14,7 +14,7 @@ A REST API app that continuously monitors the price of Bitcoin using a third-par
 ### Additional requirements
 - Should allow the user to define a max and min price in USD in the environment variables such that when the price crosses the below min or above the max values, the app sends an alert email to the defined email in the environment variables.
 - The end point `/api/prices/btc?date=DD-MM-YYYY` must allow the developer to query the database with the below expected output
-  ```json
+  ```
   {
     "url": "<http://localhost:8000/api/prices/btc?date=29-03-2022&offset=0&limit=100>",
     # current url
