@@ -20,7 +20,7 @@ public class SchedulerConfig {
     }
 
     @Bean
-    ScheduledExecutorService localExecutor() {
+    public ScheduledExecutorService localExecutor() {
         return Executors.newSingleThreadScheduledExecutor();
     }
 
