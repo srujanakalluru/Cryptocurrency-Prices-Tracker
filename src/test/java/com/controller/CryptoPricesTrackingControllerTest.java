@@ -22,14 +22,12 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CryptoPricesTrackingControllerTest {
 
-    @InjectMocks
-    private CryptoPricesTrackingController cryptoPricesTrackingController;
-
     @Mock
     CryptoPricesTrackingService cryptoPricesTrackingService;
-
     @Mock
     CryptoPricesTrackingException cryptoPricesTrackingException;
+    @InjectMocks
+    private CryptoPricesTrackingController cryptoPricesTrackingController;
 
     @Test
     void testGetPriceDetails_success() {
@@ -37,10 +35,10 @@ class CryptoPricesTrackingControllerTest {
         List<BitcoinData> dataList = Collections.singletonList(BitcoinData.builder().id(2L).price(20000D).date(DateUtils.getDate("09-08-2022")).build());
 
         //when
-        when(cryptoPricesTrackingService.getPriceDetails(any(String.class),any(),any())).thenReturn(dataList);
+        when(cryptoPricesTrackingService.getPriceDetails(any(String.class), any(), any())).thenReturn(dataList);
 
         //then
-        ResponseEntity<List<BitcoinData>> response = Assertions.assertDoesNotThrow(()->cryptoPricesTrackingController.getPriceDetails("09-08-2022",null,null));
+        ResponseEntity<List<BitcoinData>> response = Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingController.getPriceDetails("09-08-2022", null, null));
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
@@ -48,11 +46,11 @@ class CryptoPricesTrackingControllerTest {
     void testGetPriceDetails_failure() {
         //given and when
         when(cryptoPricesTrackingException.getMessage()).thenReturn("Custom cryptoPricesTrackingException");
-        when(cryptoPricesTrackingService.getPriceDetails(any(String.class),any(),any())).thenThrow(cryptoPricesTrackingException);
+        when(cryptoPricesTrackingService.getPriceDetails(any(String.class), any(), any())).thenThrow(cryptoPricesTrackingException);
 
         //then
-        CryptoPricesTrackingException e = Assertions.assertThrows(CryptoPricesTrackingException.class, ()->cryptoPricesTrackingController.getPriceDetails("09/08/2022",null,null));
-        Assertions.assertEquals("Custom cryptoPricesTrackingException",e.getMessage());
+        CryptoPricesTrackingException e = Assertions.assertThrows(CryptoPricesTrackingException.class, () -> cryptoPricesTrackingController.getPriceDetails("09/08/2022", null, null));
+        Assertions.assertEquals("Custom cryptoPricesTrackingException", e.getMessage());
     }
 
 }
