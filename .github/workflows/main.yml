@@ -39,5 +39,5 @@ jobs:
           mvn -e clean install 
           -Pcoverage sonar:sonar 
           -Dsonar.host.url=https://sonarcloud.io 
-          -Dsonar.projectKey=srujanakalluru_Cryptocurrency-Prices-Tracker 
+          -Dsonar.projectKey=Cryptocurrency-Prices-Tracker
           -Dsonar.organization=sk-cryptocurrency
