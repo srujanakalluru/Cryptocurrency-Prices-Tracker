@@ -15,7 +15,7 @@ public class LoggingBean {
     private String method;
     private Object[] arguments;
     private String[] parameters;
-    private long durationMs;
+    private Long durationMs;
     private String detailMessage;
     private String returnStatusCode;
     private String stackTrace;
@@ -25,13 +25,16 @@ public class LoggingBean {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (null != apiType) {
-            sb.append(apiType).append("\t=\t");
+            sb.append(String.format("%-11s", apiType)).append("=\t");
         }
         sb.append("{");
         sb.append("className =\"")
-                .append(className).append("\"")
-                .append(" | \tmethod =\"")
-                .append(method).append("\"");
+                .append(String.format("%-40s", className)).append("\"")
+                .append(" | method =\"")
+                .append(String.format("%-20s", method)).append("\"");
+
+        if (null != durationMs)
+            sb.append(" | \tdurationMs =\"").append(String.format("%3d", durationMs)).append("\"");
 
         if (null != parameters) {
             sb.append(" | \tparameters =\"")
@@ -41,18 +44,21 @@ public class LoggingBean {
         }
 
         if (null != returnValue) {
-            sb.append("| \treturnValue =\"").append(returnValue).append("\"");
+            sb.append(" | \treturnValue =\"").append(returnValue).append("\"");
         }
 
         if (StringUtils.hasLength(returnStatusCode)) {
             sb.append(" | \treturnStatusCode =\"").append(returnStatusCode).append("\"");
         }
 
-        sb.append(" | \tdurationMs =\"").append(durationMs).append("\"");
 
         if (StringUtils.hasLength(stackTrace)) {
             sb.append(" | \tstacktrace =\"")
-                    .append(stackTrace).append("\"");
+                    .append(stackTrace.trim()).append("\"");
+        }
+
+        if (null != detailMessage) {
+            sb.append(" | \tdetailMessage =\"").append(detailMessage).append("\"");
         }
         sb.append("}");
         return sb.toString();

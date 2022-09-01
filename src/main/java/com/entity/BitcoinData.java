@@ -1,9 +1,6 @@
 package com.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,8 +8,9 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Builder
 @ToString
+@Builder
+@AllArgsConstructor
 public class BitcoinData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +19,7 @@ public class BitcoinData {
     LocalDateTime date;
     @Column
     double price;
+    public BitcoinData() {
+        //Adding default constructor for hiberante
+    }
 }

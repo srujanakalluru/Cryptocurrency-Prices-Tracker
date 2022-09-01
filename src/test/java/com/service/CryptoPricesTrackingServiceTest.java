@@ -25,24 +25,18 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CryptoPricesTrackingServiceTest {
 
-    @InjectMocks
-    private CryptoPricesTrackingServiceImpl cryptoPricesTrackingServiceImpl;
-
     @Mock
     CoinGeckoRestApi coinGeckoRestApi;
-
     @Mock
     ResponseEntity<CryptoPricesOutput> cryptoDetails;
-
     @Mock
     CryptoPricesRepository cryptoPricesRepository;
-
     @Mock
     EmailService emailService;
-
     @Mock
     AlertConfig alertConfig;
-
+    @InjectMocks
+    private CryptoPricesTrackingServiceImpl cryptoPricesTrackingServiceImpl;
 
     @Test
     void testCheckAndReportPrice_GreaterThanMax() {
@@ -59,8 +53,8 @@ class CryptoPricesTrackingServiceTest {
         doNothing().when(emailService).sendEmailAlert(anyDouble());
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
-        verify(cryptoPricesRepository,times(1)).save(any(BitcoinData.class));
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
+        verify(cryptoPricesRepository, times(1)).save(any(BitcoinData.class));
         verify(emailService, times(1)).sendEmailAlert(anyDouble());
     }
 
@@ -80,8 +74,8 @@ class CryptoPricesTrackingServiceTest {
         doNothing().when(emailService).sendEmailAlert(anyDouble());
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
-        verify(cryptoPricesRepository,times(1)).save(any(BitcoinData.class));
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
+        verify(cryptoPricesRepository, times(1)).save(any(BitcoinData.class));
         verify(emailService, times(1)).sendEmailAlert(anyDouble());
     }
 
@@ -100,8 +94,8 @@ class CryptoPricesTrackingServiceTest {
         when(alertConfig.alertPriceMin()).thenReturn(25000d);
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
-        verify(cryptoPricesRepository,times(1)).save(any(BitcoinData.class));
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
+        verify(cryptoPricesRepository, times(1)).save(any(BitcoinData.class));
     }
 
     @Test
@@ -114,8 +108,8 @@ class CryptoPricesTrackingServiceTest {
         when(coinGeckoRestApi.getCryptoDetails()).thenReturn(cryptoDetails);
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
-        verify(cryptoPricesRepository,times(0)).save(any(BitcoinData.class));
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.checkAndReportPrice());
+        verify(cryptoPricesRepository, times(0)).save(any(BitcoinData.class));
     }
 
     @Test
@@ -130,8 +124,8 @@ class CryptoPricesTrackingServiceTest {
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(null);
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
-        verify(cryptoPricesRepository,times(1))
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository, times(1))
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
 
     }
@@ -148,8 +142,8 @@ class CryptoPricesTrackingServiceTest {
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class), any(Pageable.class))).thenReturn(null);
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
-        verify(cryptoPricesRepository,times(1))
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository, times(1))
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class), any(Pageable.class));
 
     }
@@ -166,8 +160,8 @@ class CryptoPricesTrackingServiceTest {
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(null);
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
-        verify(cryptoPricesRepository,times(1))
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository, times(1))
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
     }
 
@@ -183,8 +177,8 @@ class CryptoPricesTrackingServiceTest {
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(null);
 
         //then
-        Assertions.assertDoesNotThrow(()-> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
-        verify(cryptoPricesRepository,times(1))
+        Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingServiceImpl.getPriceDetails(date, limit, offset));
+        verify(cryptoPricesRepository, times(1))
                 .findAllByDateBetween(any(LocalDateTime.class), any(LocalDateTime.class));
     }
 

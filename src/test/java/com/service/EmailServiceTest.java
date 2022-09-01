@@ -17,18 +17,14 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EmailServiceTest {
-    @InjectMocks
-    private EmailServiceImpl emailService;
-
     @Mock
     EmailConfig emailConfig;
-
     @Mock
     JavaMailSender javaMailSender;
-
     @Mock
     MimeMessage mimeMessage;
-
+    @InjectMocks
+    private EmailServiceImpl emailService;
 
     @Test
     void testSendEmailAlert() {
@@ -43,7 +39,7 @@ class EmailServiceTest {
         when(emailConfig.senderName()).thenReturn("John Smith");
 
         //then
-        Assertions.assertDoesNotThrow(()->emailService.sendEmailAlert(alertPrice));
+        Assertions.assertDoesNotThrow(() -> emailService.sendEmailAlert(alertPrice));
         verify(javaMailSender, times(1)).send(any(MimeMessage.class));
 
     }
