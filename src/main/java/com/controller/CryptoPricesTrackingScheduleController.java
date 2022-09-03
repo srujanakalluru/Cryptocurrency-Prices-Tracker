@@ -16,12 +16,22 @@ public class CryptoPricesTrackingScheduleController {
         this.cryptoPricesTrackingSchedulerService = cryptoPricesTrackingSchedulerService;
     }
 
+    /**
+     * Starts the scheduler
+     *
+     * @return ResponseEntity<Void>
+     */
     @GetMapping("start")
     ResponseEntity<Void> start() {
         cryptoPricesTrackingSchedulerService.scheduleStart();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Stops the scheduler
+     *
+     * @return ResponseEntity<Boolean>
+     */
     @GetMapping("stop")
     ResponseEntity<Boolean> stop() {
         return ResponseEntity.ok(cryptoPricesTrackingSchedulerService.scheduleStop());

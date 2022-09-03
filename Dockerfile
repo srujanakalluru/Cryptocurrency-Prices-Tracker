@@ -3,6 +3,6 @@ FROM adoptopenjdk/openjdk11
 #USER spring:spring
 VOLUME /tmp
 ARG JAR_FILE
-ADD ${JAR_FILE} /app/crypto-prices-tracker.jar
+ADD ${JAR_FILE} /app/cryptocurrency-prices-tracker.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-Dspring.profiles.active=docker","-Djava.security.egd=file:/dev/./urandom","-jar","/app/crypto-prices-tracker.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=docker","-Djava.security.egd=file:/dev/./urandom","-jar","/app/cryptocurrency-prices-tracker.jar"]
