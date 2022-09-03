@@ -18,74 +18,120 @@ import static com.logging.LoggingBean.ApiType.*;
 @Slf4j(topic = "CryptoPricesTrackerApplication")
 public class LoggingAspect {
 
+    /**
+     * Pointcut for controller
+     */
     @Pointcut("execution(* com.controller..*(..))")
     public void controllerPointCut() {
         // Method is empty as this is just a Pointcut
     }
 
+    /**
+     * Pointcut for repository
+     */
     @Pointcut("execution(* com.repository..*(..))")
     public void repositoryPointCut() {
         // Method is empty as this is just a Pointcut
     }
 
+    /**
+     * Pointcut for service
+     */
     @Pointcut("execution(* com.service..*(..))")
     public void servicePointCut() {
         // Method is empty as this is just a Pointcut
     }
 
+    /**
+     * Pointcut for scheduler start method
+     */
     @Pointcut("execution(* com.scheduler.impl.CryptoPricesTrackingSchedulerServiceImpl.scheduleStart(..))")
     public void schedulerStartPointCut() {
         // Method is empty as this is just a Pointcut
     }
 
+    /**
+     * Pointcut for scheduler stop method
+     */
     @Pointcut("execution(* com.scheduler.impl.CryptoPricesTrackingSchedulerServiceImpl.scheduleStop(..))")
     public void schedulerStopPointCut() {
         // Method is empty as this is just a Pointcut
     }
 
-
+    /**
+     * Pointcut for external client calls
+     */
     @Pointcut("execution(* com.client..*(..))")
     public void externalServicePointCut() {
         // Method is empty as this is just a Pointcut
     }
 
+    /**
+     * Pointcut for all classes
+     */
     @Pointcut("execution(* com..*(..))")
     private void allClassesPointCut() {
         // Method is empty as this is just a Pointcut
     }
 
 
+    /**
+     * @param joinPoint joinPoint
+     * @throws Throwable throwable
+     */
     @Before("schedulerStartPointCut()")
     public void logBeforeSchedulerStart(JoinPoint joinPoint) throws Throwable {
         logBeforeBean(joinPoint, SCHEDULER, "Starting the scheduler");
     }
 
+    /**
+     * @param joinPoint joinPoint
+     * @throws Throwable throwable
+     */
     @Before("schedulerStopPointCut()")
     public void logBeforeSchedulerStop(JoinPoint joinPoint) throws Throwable {
         logBeforeBean(joinPoint, SCHEDULER, "Stopping the scheduler");
     }
 
+    /**
+     * @param proceedingJoinPoint proceedingJoinPoint
+     * @throws Throwable throwable
+     */
     @Around("controllerPointCut()")
     public Object logAroundController(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         return logAroundBean(proceedingJoinPoint, CONTROLLER);
     }
 
+    /**
+     * @param proceedingJoinPoint proceedingJoinPoint
+     * @throws Throwable throwable
+     */
     @Around("servicePointCut()")
     public Object logAroundService(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         return logAroundBean(proceedingJoinPoint, SERVICE);
     }
 
+    /**
+     * @param proceedingJoinPoint proceedingJoinPoint
+     * @throws Throwable throwable
+     */
     @Around("externalServicePointCut()")
     public Object logAroundExternalService(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         return logAroundBean(proceedingJoinPoint, EXTERNAL);
     }
 
+    /**
+     * @param proceedingJoinPoint proceedingJoinPoint
+     * @throws Throwable throwable
+     */
     @Around("repositoryPointCut()")
     public Object logAroundRepository(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         return logAroundBean(proceedingJoinPoint, REPOSITORY);
     }
 
-
+    /**
+     * @param joinPoint joinPoint
+     */
     @AfterThrowing(value = "controllerPointCut()", throwing = "ex")
     public void logAfterThrowingExceptionCall(JoinPoint joinPoint, Throwable ex) {
         logErrorBean(joinPoint, ex);
@@ -106,6 +152,12 @@ public class LoggingAspect {
     }
 
 
+    /**
+     * @param joinPoint     joinPoint
+     * @param apiType       apiType
+     * @param detailMessage detailMessage
+     * @throws Throwable throwable
+     */
     private void logBeforeBean(JoinPoint joinPoint, LoggingBean.ApiType apiType, String detailMessage) throws Throwable {
         CodeSignature signature = (CodeSignature) joinPoint.getSignature();
         LoggingBean bean = LoggingBean.builder()
@@ -121,10 +173,23 @@ public class LoggingAspect {
     }
 
 
+    /**
+     * @param proceedingJoinPoint proceedingJoinPoint
+     * @param apiType             apiType
+     * @return Object
+     * @throws Throwable throwable
+     */
     private Object logAroundBean(ProceedingJoinPoint proceedingJoinPoint, LoggingBean.ApiType apiType) throws Throwable {
         return logAroundBean(proceedingJoinPoint, apiType, null);
     }
 
+    /**
+     * @param proceedingJoinPoint proceedingJoinPoint
+     * @param apiType             apiType
+     * @param detailMessage       detailMessage
+     * @return Object
+     * @throws Throwable throwable
+     */
     private Object logAroundBean(ProceedingJoinPoint proceedingJoinPoint, LoggingBean.ApiType apiType, String detailMessage) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object object = proceedingJoinPoint.proceed();

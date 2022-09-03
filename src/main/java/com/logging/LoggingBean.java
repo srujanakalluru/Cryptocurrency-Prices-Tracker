@@ -21,6 +21,9 @@ public class LoggingBean {
     private String stackTrace;
     private Object returnValue;
 
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

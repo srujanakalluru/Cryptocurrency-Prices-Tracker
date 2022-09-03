@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com</groupId>
-    <artifactId>crypto-prices-tracker</artifactId>
+    <artifactId>cryptocurrency-prices-tracker</artifactId>
     <version>latest</version>
-    <name>crypto-prices-tracker</name>
+    <name>cryptocurrency-prices-tracker</name>
     <description>A REST API app that continuously monitors the price of Bitcoin using a third-party API and alerts a
         given email when the price either goes above or below given limits.
     </description>
@@ -136,5 +136,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

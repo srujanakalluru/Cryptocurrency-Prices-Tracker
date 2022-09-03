@@ -31,6 +31,9 @@ public class CryptoPricesTrackingSchedulerServiceImpl implements CryptoPricesTra
 
     }
 
+    /**
+     * Service method to start the scheduler
+     */
     @Override
     @SneakyThrows
     public void scheduleStart() {
@@ -45,6 +48,11 @@ public class CryptoPricesTrackingSchedulerServiceImpl implements CryptoPricesTra
         }
     }
 
+    /**
+     * Service method to stop the scheduler
+     *
+     * @return boolean
+     */
     @Override
     public boolean scheduleStop() {
         return scheduledFuture.cancel(true);
