@@ -15,7 +15,6 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/labeler_config.yml
           sync-labels: true
-          delete-other-labels: true
       - name: Checkout
         uses: actions/checkout@v2
         with:
