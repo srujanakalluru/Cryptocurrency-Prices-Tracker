@@ -30,6 +30,12 @@ public class CryptoPricesTrackingController {
         this.service = service;
     }
 
+    /**
+     * @param date
+     * @param limit
+     * @param offset
+     * @return ResponseEntity<List<BitcoinData>>
+     */
     @ApiOperation("Retrieve current and historical bitcoin price information")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK Successfully fetched the bitcoin data", response = List.class),

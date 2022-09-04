@@ -34,6 +34,10 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
         this.emailService = emailService;
     }
 
+    /**
+     * Method to check the bitcoin price, persist in the database and alert the user via email if the price
+     * falls outside the configurable range
+     */
     public void checkAndReportPrice() {
         CryptoPricesOutput body = coinGeckoRestApi.getCryptoDetails().getBody();
 
@@ -45,11 +49,15 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
             if ((currentValue > alertConfig.alertPriceMax() || currentValue < alertConfig.alertPriceMin())) {
                 emailService.sendEmailAlert(currentValue);
             }
-
         }
-
     }
 
+    /**
+     * @param date
+     * @param limit
+     * @param offset
+     * @return Lit<BitcoinData>
+     */
     @Override
     public List<BitcoinData> getPriceDetails(String date, Integer limit, Integer offset) {
         LocalDateTime from = DateUtils.getDate(date);
@@ -62,6 +70,5 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
             return cryptoPricesRepository.findAllByDateBetween(from, to);
         }
     }
-
 
 }

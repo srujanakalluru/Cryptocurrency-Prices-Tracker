@@ -17,13 +17,17 @@ public class EmailServiceImpl implements EmailService {
     private final JavaMailSender javaMailSender;
     private final EmailConfig emailConfig;
 
-
     @Autowired
     public EmailServiceImpl(JavaMailSender javaMailSender, EmailConfig emailConfig) {
         this.javaMailSender = javaMailSender;
         this.emailConfig = emailConfig;
     }
 
+    /**
+     * Method to send email alert with the alert price
+     *
+     * @param alertPrice
+     */
     @SneakyThrows
     public void sendEmailAlert(double alertPrice) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();

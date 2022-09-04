@@ -8,6 +8,11 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 public class SwaggerController {
 
+    /**
+     * Sets the index page mapping to point to the Swagger UI.
+     *
+     * @return A redirect to the Swagger UI.
+     */
     @GetMapping("/")
     public String index() {
         return "redirect:swagger-ui/";

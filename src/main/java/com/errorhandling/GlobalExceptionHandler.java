@@ -18,50 +18,50 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MessagingException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<GlobalError> handleMessagingException(MessagingException e) {
-        GlobalError error = new GlobalError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleMessagingException(MessagingException messagingException) {
+        GlobalError error = new GlobalError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED, messagingException.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(AuthenticationFailedException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<GlobalError> handleAuthenticationFailedException(AuthenticationFailedException e) {
-        GlobalError error = new GlobalError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleAuthenticationFailedException(AuthenticationFailedException authenticationFailedException) {
+        GlobalError error = new GlobalError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED, authenticationFailedException.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(MailAuthenticationException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<GlobalError> handleMailAuthenticationException(MailAuthenticationException e) {
-        GlobalError error = new GlobalError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleMailAuthenticationException(MailAuthenticationException mailAuthenticationException) {
+        GlobalError error = new GlobalError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED, mailAuthenticationException.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ResponseEntity<GlobalError> handleConstraintViolationException(ConstraintViolationException e) {
-        GlobalError error = new GlobalError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
+        GlobalError error = new GlobalError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST, constraintViolationException.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ResponseEntity<GlobalError> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        GlobalError error = new GlobalError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException methodArgumentTypeMismatchException) {
+        GlobalError error = new GlobalError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST, methodArgumentTypeMismatchException.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CryptoPricesTrackingException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<GlobalError> handleCryptoPricesTrackingException(CryptoPricesTrackingException e) {
-        GlobalError error = new GlobalError(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleCryptoPricesTrackingException(CryptoPricesTrackingException cryptoPricesTrackingException) {
+        GlobalError error = new GlobalError(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR, cryptoPricesTrackingException.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<GlobalError> handleUnhandledException(Exception e) {
-        GlobalError error = new GlobalError(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), LocalDateTime.now());
+    public ResponseEntity<GlobalError> handleUnhandledException(Exception exception) {
+        GlobalError error = new GlobalError(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
