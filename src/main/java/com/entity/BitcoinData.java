@@ -19,7 +19,6 @@ public class BitcoinData {
     LocalDateTime date;
     @Column
     double price;
-
     public BitcoinData() {
         //Adding default constructor for hiberante
     }

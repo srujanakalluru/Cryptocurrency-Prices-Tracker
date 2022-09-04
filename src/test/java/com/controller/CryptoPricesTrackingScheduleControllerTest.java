@@ -49,7 +49,7 @@ class CryptoPricesTrackingScheduleControllerTest {
         doThrow(cryptoPricesTrackingException).when(cryptoPricesTrackingSchedulerService).scheduleStart();
 
         //then
-        CryptoPricesTrackingException exception = Assertions.assertThrows(CryptoPricesTrackingException.class, () -> cryptoPricesTrackingScheduleController.start());
+        CryptoPricesTrackingException exception = Assertions.assertThrows(CryptoPricesTrackingException.class,() -> cryptoPricesTrackingScheduleController.start());
         assertNotNull(cryptoPricesTrackingException.getMessage());
     }
 
