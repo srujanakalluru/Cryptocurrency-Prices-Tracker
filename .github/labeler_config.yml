@@ -1,27 +1,13 @@
 version: "1"
-labels:
-  - label: "xsmall-diff"
-    size-below: 10
-  - label: "small-diff"
-    size-above: 9
-    size-below: 100
-  - label: "medium-diff"
-    size-above: 99
-    size-below: 500
-  - label: "large-diff"
-    size-above: 499
-    size-below: 1000
-  - label: "xlarge-diff"
-    size-above: 999
-  - client: src/**/java/com/client/**/*.java
-  - configuration: src/**/java/com/configuration/**/*.java
-  - controller: src/**/java/controller/**/*.java
-  - dto: src/**/java/dto/**/*.java
-  - entity: src/**/java/entity/**/*.java
-  - errorhandling: src/**/java/errorhandling/**/*.java
-  - logging: src/**/java/logging/**/*.java
-  - repository: src/**/java/repository/**/*.java
-  - scheduler: src/**/java/scheduler/**/*.java
-  - service: src/**/java/service/**/*.java
-  - utils: src/**/java/utils/**/*.java
-  - resources: src/**/resources/**/*.*
+client: src/**/java/com/client/**/*.java
+configuration: src/**/java/com/configuration/**/*.java
+controller: src/**/java/controller/**/*.java
+dto: src/**/java/dto/**/*.java
+entity: src/**/java/entity/**/*.java
+errorhandling: src/**/java/errorhandling/**/*.java
+logging: src/**/java/logging/**/*.java
+repository: src/**/java/repository/**/*.java
+scheduler: src/**/java/scheduler/**/*.java
+service: src/**/java/service/**/*.java
+utils: src/**/java/utils/**/*.java
+resources: src/**/resources/**/*.*
