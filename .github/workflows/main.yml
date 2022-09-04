@@ -7,13 +7,14 @@ on:
     types: [ opened, synchronize, reopened ]
 jobs:
   build:
-    name: Build and Sonar Scan
     runs-on: ubuntu-latest
     steps:
+      - name: Labeler
       - uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          configuration-path: .github/main.yml
+          configuration-path: .github/labeler_config.yml
+      - name: Checkout
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
