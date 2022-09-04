@@ -34,7 +34,7 @@ public class CryptoPricesTrackingController {
      * @param date
      * @param limit
      * @param offset
-     * @return ResponseEntity<List<BitcoinData>>
+     * @return ResponseEntity<List < BitcoinData>>
      */
     @ApiOperation("Retrieve current and historical bitcoin price information")
     @ApiResponses(value = {
