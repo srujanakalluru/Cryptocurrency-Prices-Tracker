@@ -5,9 +5,11 @@ import com.configuration.RestTemplateConfig;
 import com.dto.CryptoPricesOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
 
 @Component
 @Slf4j
@@ -25,7 +27,12 @@ public class CoinGeckoRestApi {
     }
 
     public ResponseEntity<CryptoPricesOutput> getCryptoDetails() {
-        return restTemplate.getForEntity(restTemplateConfig.externalUrl() + "?ids=" + alertConfig.coinId() + "&vs_currencies=" + alertConfig.valueCurrency(), CryptoPricesOutput.class);
+        String url = restTemplateConfig.externalUrl() + "?ids=" + alertConfig.coinId() + "&vs_currencies=" + alertConfig.valueCurrency();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<String> httpEntity = new HttpEntity<>(headers);
+        return restTemplate.exchange(url, HttpMethod.GET, httpEntity, CryptoPricesOutput.class);
     }
 
 
