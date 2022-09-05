@@ -1,0 +1,17 @@
+version: "1"
+client: src/**/java/com/client/**/*.java
+configuration: src/**/java/com/configuration/**/*.java
+controller: src/**/java/com/controller/**/*.java
+dto: src/**/java/com/dto/**/*.java
+entity: src/**/java/com/entity/**/*.java
+errorhandling: src/**/java/com/errorhandling/**/*.java
+logging: src/**/java/com/logging/**/*.java
+repository: src/**/java/com/repository/**/*.java
+scheduler: src/**/java/com/scheduler/**/*.java
+service: src/**/java/com/service/**/*.java
+utils: src/**/java/com/utils/**/*.java
+resources: src/**/resources/**/*.*
+github: .github/**/*.*
+docker: docker-compose.yml, Dockerfile
+maven: pom.xml
+readme: README.md
