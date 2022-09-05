@@ -67,29 +67,18 @@ public class LoggingAspect {
     }
 
     /**
-     * Pointcut for all classes
-     */
-    @Pointcut("execution(* com..*(..))")
-    private void allClassesPointCut() {
-        // Method is empty as this is just a Pointcut
-    }
-
-
-    /**
      * @param joinPoint joinPoint
-     * @throws Throwable throwable
      */
     @Before("schedulerStartPointCut()")
-    public void logBeforeSchedulerStart(JoinPoint joinPoint) throws Throwable {
+    public void logBeforeSchedulerStart(JoinPoint joinPoint) {
         logBeforeBean(joinPoint, SCHEDULER, "Starting the scheduler");
     }
 
     /**
      * @param joinPoint joinPoint
-     * @throws Throwable throwable
      */
     @Before("schedulerStopPointCut()")
-    public void logBeforeSchedulerStop(JoinPoint joinPoint) throws Throwable {
+    public void logBeforeSchedulerStop(JoinPoint joinPoint) {
         logBeforeBean(joinPoint, SCHEDULER, "Stopping the scheduler");
     }
 
@@ -156,9 +145,8 @@ public class LoggingAspect {
      * @param joinPoint     joinPoint
      * @param apiType       apiType
      * @param detailMessage detailMessage
-     * @throws Throwable throwable
      */
-    private void logBeforeBean(JoinPoint joinPoint, LoggingBean.ApiType apiType, String detailMessage) throws Throwable {
+    private void logBeforeBean(JoinPoint joinPoint, LoggingBean.ApiType apiType, String detailMessage) {
         CodeSignature signature = (CodeSignature) joinPoint.getSignature();
         LoggingBean bean = LoggingBean.builder()
                 .apiType(apiType)
@@ -168,8 +156,7 @@ public class LoggingAspect {
                 .arguments(joinPoint.getArgs())
                 .detailMessage(detailMessage)
                 .build();
-        if (log.isInfoEnabled())
-            log.info(bean.toString());
+        log.info(bean.toString());
     }
 
 
@@ -207,8 +194,7 @@ public class LoggingAspect {
                 .durationMs(endTime - startTime)
                 .detailMessage(detailMessage)
                 .build();
-        if (log.isInfoEnabled())
-            log.info(bean.toString());
+        log.info(bean.toString());
         return object;
     }
 
