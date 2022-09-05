@@ -6,7 +6,7 @@ on:
     branches: [ "master","main" ]
     types: [ opened, synchronize, reopened ]
 jobs:
-  build:
+  label:
     runs-on: ubuntu-latest
     steps:
       - name: Labeler
@@ -15,6 +15,9 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/labeler_config.yml
           sync-labels: true
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
