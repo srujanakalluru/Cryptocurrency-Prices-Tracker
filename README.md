@@ -12,6 +12,8 @@ price either goes above or below given limits.
     - `data` in the format `DD-MM-YYYY` (Mandatory param)
     - `limit` - for pagination that indicates how many rows that need to be returned
     - `offset` - for pagination that indicates what’s the offset entry from where the rows need to start
+3. Use Mailtrap SMTP service to send alert emails. Be sure to include Mailtrap config variables in the .env environment variable file.
+4. Dockerize the project
 
 ### Additional requirements
 
@@ -40,10 +42,6 @@ price either goes above or below given limits.
     ],
     # array of price objects
   }
-
-3. Use Mailtrap SMTP service to send alert emails. Be sure to include Mailtrap config variables in the .env environment
-   variable file.
-4. Dockerize the project
 
 ## References
 
