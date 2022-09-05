@@ -7,13 +7,16 @@ on:
     types: [ opened, synchronize, reopened ]
 jobs:
   label:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Labeler
         uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          configuration-path: .github/labeler_config.yml
+          configuration-path: .github/workflows/labeler_config.yml
           sync-labels: true
   build:
     runs-on: ubuntu-latest
