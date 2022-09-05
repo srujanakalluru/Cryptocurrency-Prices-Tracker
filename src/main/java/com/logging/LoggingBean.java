@@ -17,7 +17,6 @@ public class LoggingBean {
     private String[] parameters;
     private Long durationMs;
     private String detailMessage;
-    private String returnStatusCode;
     private String stackTrace;
     private Object returnValue;
 
@@ -27,9 +26,7 @@ public class LoggingBean {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (null != apiType) {
-            sb.append(String.format("%-11s", apiType)).append("=\t");
-        }
+        sb.append(String.format("%-11s", apiType)).append("=\t");
         sb.append("{");
         sb.append("className =\"")
                 .append(String.format("%-40s", className)).append("\"")
@@ -50,11 +47,6 @@ public class LoggingBean {
             sb.append(" | \treturnValue =\"").append(returnValue).append("\"");
         }
 
-        if (StringUtils.hasLength(returnStatusCode)) {
-            sb.append(" | \treturnStatusCode =\"").append(returnStatusCode).append("\"");
-        }
-
-
         if (StringUtils.hasLength(stackTrace)) {
             sb.append(" | \tstacktrace =\"")
                     .append(stackTrace.trim()).append("\"");
@@ -69,19 +61,13 @@ public class LoggingBean {
 
     @Getter
     public enum ApiType {
-        EXTERNAL("EXTERNAL"),
-        CONTROLLER("CONTROLLER"),
-        SERVICE("SERVICE"),
-        REPOSITORY("REPOSITORY"),
-        EXCEPTIONHANDLER("EXCEPTIONHANDLER"),
-        SCHEDULER("SCHEDULER"),
-        ERROR("ERROR");
-
-        private final String type;
-
-        ApiType(String type) {
-            this.type = type;
-        }
+        EXTERNAL,
+        CONTROLLER,
+        SERVICE,
+        REPOSITORY,
+        EXCEPTIONHANDLER,
+        SCHEDULER,
+        ERROR
     }
 
 }
