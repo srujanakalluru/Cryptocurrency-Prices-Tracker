@@ -102,9 +102,9 @@
                         <version>0.8.6</version>
                         <configuration>
                             <excludes>
-                                <exclude>com/dto/**/*.*</exclude>
-                                <exclude>com/entity/**/*.*</exclude>
-                                <exclude>**/config/*</exclude>
+                                <exclude>com/dto/*.*</exclude>
+                                <exclude>com/entity/*.*</exclude>
+                                <exclude>com/configuration/*.*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
