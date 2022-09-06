@@ -6,12 +6,12 @@ price either goes above or below given limits.
 ## Goal
 
 1. Build a REST API app that continuously monitors the price of Bitcoin using a third-party API
-    - Alerts a given email when the price either goes above or below given limits
-    - Stores the queried price in the database
+   - Alerts a given email when the price either goes above or below given limits
+   - Stores the queried price in the database
 2. Create the endpoint `/api/prices/btc?date=DD-MM-YYYY` that accepts the below request params
-    - `data` in the format `DD-MM-YYYY` (Mandatory param)
-    - `limit` - for pagination that indicates how many rows that need to be returned
-    - `offset` - for pagination that indicates what’s the offset entry from where the rows need to start
+   - `data` in the format `DD-MM-YYYY` (Mandatory param)
+   - `limit` - for pagination that indicates how many rows that need to be returned
+   - `offset` - for pagination that indicates what’s the offset entry from where the rows need to start
 3. Use Mailtrap SMTP service to send alert emails. Be sure to include Mailtrap config variables in the .env environment variable file.
 4. Dockerize the project
 
@@ -22,6 +22,7 @@ price either goes above or below given limits.
   variables.
 - The end point `/api/prices/btc?date=DD-MM-YYYY` must allow the developer to query the database with the below expected
   output
+
   ```
   {
     "url": "<http://localhost:8000/api/prices/btc?date=29-03-2022&offset=0&limit=100>",
@@ -42,6 +43,7 @@ price either goes above or below given limits.
     ],
     # array of price objects
   }
+  ```
 
 ## References
 
