@@ -38,7 +38,7 @@ class CryptoPricesTrackingScheduleControllerTest {
         doNothing().when(cryptoPricesTrackingSchedulerService).scheduleStart();
 
         //then
-        ResponseEntity<Void> response = Assertions.assertDoesNotThrow(() -> cryptoPricesTrackingScheduleController.start());
+        ResponseEntity<Void> response = assertDoesNotThrow(() -> cryptoPricesTrackingScheduleController.start());
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
@@ -50,7 +50,7 @@ class CryptoPricesTrackingScheduleControllerTest {
 
         //then
         CryptoPricesTrackingException exception = Assertions.assertThrows(CryptoPricesTrackingException.class, () -> cryptoPricesTrackingScheduleController.start());
-        assertNotNull(cryptoPricesTrackingException.getMessage());
+        assertNotNull(exception.getMessage());
     }
 
     @Test
