@@ -2,7 +2,6 @@ package com.service.impl;
 
 import com.client.CoinGeckoRestApi;
 import com.configuration.AlertConfig;
-import com.configuration.EmailConfig;
 import com.dto.CryptoPricesOutput;
 import com.entity.BitcoinData;
 import com.repository.CryptoPricesRepository;
@@ -27,7 +26,7 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
     private final EmailService emailService;
 
     @Autowired
-    public CryptoPricesTrackingServiceImpl(CoinGeckoRestApi coinGeckoRestApi, CryptoPricesRepository cryptoPricesRepository, EmailConfig emailConfig, AlertConfig alertConfig, EmailService emailService) {
+    public CryptoPricesTrackingServiceImpl(CoinGeckoRestApi coinGeckoRestApi, CryptoPricesRepository cryptoPricesRepository, AlertConfig alertConfig, EmailService emailService) {
         this.coinGeckoRestApi = coinGeckoRestApi;
         this.cryptoPricesRepository = cryptoPricesRepository;
         this.alertConfig = alertConfig;
@@ -53,9 +52,9 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
     }
 
     /**
-     * @param date
-     * @param limit
-     * @param offset
+     * @param date   date
+     * @param limit  limit
+     * @param offset offset
      * @return Lit<BitcoinData>
      */
     @Override
@@ -70,5 +69,4 @@ public class CryptoPricesTrackingServiceImpl implements CryptoPricesTrackingServ
             return cryptoPricesRepository.findAllByDateBetween(from, to);
         }
     }
-
 }

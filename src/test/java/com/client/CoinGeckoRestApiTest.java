@@ -32,21 +32,6 @@ class CoinGeckoRestApiTest {
     @InjectMocks
     CoinGeckoRestApi coinGeckoRestApi;
 
-    @Test
-    void getCryptoDetailsTest_Success() {
-        //given
-        when(restTemplateConfig.externalUrl()).thenReturn("http://dummy/");
-        when(alertConfig.coinId()).thenReturn("bitcoin");
-        when(alertConfig.valueCurrency()).thenReturn("USD");
-
-        //when
-        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(),ArgumentMatchers.<Class<CryptoPricesOutput>>any())).thenReturn(getCryptoPricesOutputResponseEntity());
-
-        //then
-        assertDoesNotThrow(() -> coinGeckoRestApi.getCryptoDetails());
-        verify(restTemplate, times(1)).exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), ArgumentMatchers.<Class<CryptoPricesOutput>>any());
-    }
-
     private static ResponseEntity<CryptoPricesOutput> getCryptoPricesOutputResponseEntity() {
         HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.APPLICATION_JSON);
@@ -55,6 +40,21 @@ class CoinGeckoRestApiTest {
         CryptoPricesOutput cryptoPricesOutput = new CryptoPricesOutput();
         cryptoPricesOutput.setBitcoin(bitcoin);
         return new ResponseEntity<>(cryptoPricesOutput, header, HttpStatus.OK);
+    }
+
+    @Test
+    void getCryptoDetailsTest_Success() {
+        //given
+        when(restTemplateConfig.externalUrl()).thenReturn("http://dummy/");
+        when(alertConfig.coinId()).thenReturn("bitcoin");
+        when(alertConfig.valueCurrency()).thenReturn("USD");
+
+        //when
+        when(restTemplate.exchange(anyString(), any(HttpMethod.class), any(), ArgumentMatchers.<Class<CryptoPricesOutput>>any())).thenReturn(getCryptoPricesOutputResponseEntity());
+
+        //then
+        assertDoesNotThrow(() -> coinGeckoRestApi.getCryptoDetails());
+        verify(restTemplate, times(1)).exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), ArgumentMatchers.<Class<CryptoPricesOutput>>any());
     }
 
 }

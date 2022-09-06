@@ -26,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
     /**
      * Method to send email alert with the alert price
      *
-     * @param alertPrice
+     * @param alertPrice alertPrice
      */
     @SneakyThrows
     public void sendEmailAlert(double alertPrice) {
@@ -40,5 +40,4 @@ public class EmailServiceImpl implements EmailService {
         mimeMessageHelper.setPriority(0);
         javaMailSender.send(mimeMessage);
     }
-
 }
