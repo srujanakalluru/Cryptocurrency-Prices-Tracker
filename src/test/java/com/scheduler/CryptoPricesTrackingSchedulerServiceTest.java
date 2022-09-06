@@ -50,33 +50,33 @@ class CryptoPricesTrackingSchedulerServiceTest {
 
     @Test
     void scheduleStart_Success() {
-        when(localExecutor.scheduleAtFixedRate(any(Runnable.class),anyLong(),anyLong(),any(TimeUnit.class))).thenReturn(scheduledFuture);
-        assertDoesNotThrow(()->cryptoPricesTrackingSchedulerServiceImpl.scheduleStart());
+        when(localExecutor.scheduleAtFixedRate(any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class))).thenReturn(scheduledFuture);
+        assertDoesNotThrow(() -> cryptoPricesTrackingSchedulerServiceImpl.scheduleStart());
     }
 
     @Test
     void scheduleStart_ThrowsExecutionException() throws ExecutionException, InterruptedException {
         when(executionException.getCause()).thenReturn(authenticationFailedException);
-        when(localExecutor.scheduleAtFixedRate(any(Runnable.class),anyLong(),anyLong(),any(TimeUnit.class))).thenReturn(scheduledFuture);
+        when(localExecutor.scheduleAtFixedRate(any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class))).thenReturn(scheduledFuture);
         when(scheduledFuture.get()).thenThrow(executionException);
-        assertThrows(AuthenticationFailedException.class,()->cryptoPricesTrackingSchedulerServiceImpl.scheduleStart());
+        assertThrows(AuthenticationFailedException.class, () -> cryptoPricesTrackingSchedulerServiceImpl.scheduleStart());
     }
 
     @Test
     void scheduleStart_ThrowsInterruptedException() throws ExecutionException, InterruptedException {
-        when(localExecutor.scheduleAtFixedRate(any(Runnable.class),anyLong(),anyLong(),any(TimeUnit.class))).thenReturn(scheduledFuture);
+        when(localExecutor.scheduleAtFixedRate(any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class))).thenReturn(scheduledFuture);
         when(scheduledFuture.get()).thenThrow(interruptedException);
-        assertThrows(CryptoPricesTrackingException.class,()->cryptoPricesTrackingSchedulerServiceImpl.scheduleStart());
+        assertThrows(CryptoPricesTrackingException.class, () -> cryptoPricesTrackingSchedulerServiceImpl.scheduleStart());
     }
 
     @Test
     void scheduleStop_success() {
         //given and when
-        when(localExecutor.scheduleAtFixedRate(any(Runnable.class),anyLong(),anyLong(),any(TimeUnit.class))).thenReturn(scheduledFuture);
+        when(localExecutor.scheduleAtFixedRate(any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class))).thenReturn(scheduledFuture);
         cryptoPricesTrackingSchedulerServiceImpl.scheduleStart();
         when(scheduledFuture.cancel(true)).thenReturn(true);
 
         //then
-        assertDoesNotThrow(()->cryptoPricesTrackingSchedulerServiceImpl.scheduleStop());
+        assertDoesNotThrow(() -> cryptoPricesTrackingSchedulerServiceImpl.scheduleStop());
     }
 }

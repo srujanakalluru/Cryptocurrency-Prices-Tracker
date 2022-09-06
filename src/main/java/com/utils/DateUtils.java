@@ -17,7 +17,7 @@ public class DateUtils {
     /**
      * Utility method to get current date in the format specified by the formatter
      *
-     * @param date
+     * @param date string
      * @return LocalDateTime
      */
     public static LocalDateTime getDate(String date) {
@@ -28,8 +28,8 @@ public class DateUtils {
     /**
      * Utility method to get next date in the format specified by the formatter
      *
-     * @param date
-     * @return
+     * @param date date
+     * @return LocalDateTime
      */
     public static LocalDateTime getNextDate(String date) {
         LocalDate l = LocalDate.parse(date, formatter);

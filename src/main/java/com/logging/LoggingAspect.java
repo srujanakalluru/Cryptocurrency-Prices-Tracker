@@ -163,7 +163,7 @@ public class LoggingAspect {
     /**
      * @param proceedingJoinPoint proceedingJoinPoint
      * @param apiType             apiType
-     * @return Object
+     * @return Object object
      * @throws Throwable throwable
      */
     private Object logAroundBean(ProceedingJoinPoint proceedingJoinPoint, LoggingBean.ApiType apiType) throws Throwable {
