@@ -11,7 +11,7 @@ scheduler: src/**/java/com/scheduler/**/*.java
 service: src/**/java/com/service/**/*.java
 utils: src/**/java/com/utils/**/*.java
 resources: src/**/resources/**/*.*
-github: .github/**/*.*
+workflow: .github/**/*.*
 docker: docker-compose.yml, Dockerfile
 maven: pom.xml
 readme: README.md

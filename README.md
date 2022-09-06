@@ -45,5 +45,5 @@ price either goes above or below given limits.
 
 ## References
 
-- CoinGecko API Doc: https://www.coingecko.com/en/api/documentation
-- Mailtrap: https://mailtrap.io/
+- CoinGecko API Doc: <https://www.coingecko.com/en/api/documentation>
+- Mailtrap: <https://mailtrap.io/>
