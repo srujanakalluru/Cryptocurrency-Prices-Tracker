@@ -1,10 +1,12 @@
 name: Codacy Security Scan
 on:
   workflow_run:
-    workflows: ["Upload Artifact"]
+    workflows:
+      - Upload Artifact
+    types:
+      - completed
 jobs:
   codacy-security-scan:
-    needs: upload-artifact
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results

@@ -1,9 +1,12 @@
 name: Build, Test & Sonar
 on:
   workflow_run:
-    workflows: ["Upload Artifact"]
+    workflows:
+      - "Upload Artifact"
+    types:
+      - completed
 jobs:
-  build:
+  sonar-scan:
     runs-on: ubuntu-latest
     name: Sonar scan
     steps:
