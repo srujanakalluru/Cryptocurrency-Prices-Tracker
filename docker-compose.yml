@@ -1,6 +1,6 @@
 version: '3'
 services:
-  cryptocurrency-prices-tracker:
+  app:
     image: creationk/cryptocurrency-prices-tracker
     ports:
       - "8080:8080"
