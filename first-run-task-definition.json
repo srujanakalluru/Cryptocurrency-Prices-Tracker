@@ -52,11 +52,6 @@
   "placementConstraints": [],
   "memory": "128",
   "taskRoleArn": null,
-  "compatibilities": [
-    "EXTERNAL",
-    "EC2"
-  ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:759266914712:task-definition/DeployContainer:1",
   "family": "DeployContainer",
   "requiresAttributes": [],
   "pidMode": null,
@@ -66,8 +61,6 @@
   "networkMode": null,
   "runtimePlatform": null,
   "cpu": "1024",
-  "revision": 1,
-  "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
   "volumes": []
