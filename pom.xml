@@ -17,6 +17,7 @@
     <description>A REST API app that continuously monitors the price of Bitcoin using a third-party API and alerts a
         given email when the price either goes above or below given limits.
     </description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -122,13 +123,13 @@
             </build>
         </profile>
     </profiles>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <executable>true</executable>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
